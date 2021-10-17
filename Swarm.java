@@ -59,6 +59,7 @@ public class Swarm {
       while (t <= T) {
         for (int i = 0; i < nIdeas; i++) {
           if (swarm.get(i).isBetterThan(g)) {
+            System.out.printf("Mejor idea encontrada en la iteración %s\n",t);
             g.copy(swarm.get(i));
           }
         }
