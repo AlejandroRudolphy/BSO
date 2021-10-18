@@ -50,7 +50,7 @@ public class Idea {
     }
 
 	protected void repare() {
-    System.out.println("Hola");
+    
 	}
 
   /*protected void move(Idea g, float w, float c1, float c2) {

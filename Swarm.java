@@ -31,23 +31,23 @@ public class Swarm {
     g = new Idea();
     Idea p = null;
     for (int i = 1; i <= nIdeas; i++) {
-    do {
+    /*do {
       p = new Idea();
     }while(!p.isFeasible());
       swarm.add(p);
+    }*/
+      p = new Idea();
+      if (!p.isFeasible()) {
+       p.repare();
+      }
+      swarm.add(p);
     }
-    /*p = new Agent();
-    if (!p.isFeasible()) {
-      p.repare();
-    }
-    //p.updatePBest();
-    swarm.add(p);*/
     g.copy(swarm.get(0));
-    /*for (int i = 1; i < nIdeas; i++) {
+    for (int i = 1; i < nIdeas; i++) {
       if (swarm.get(i).isBetterThan(g)) {
           g.copy(swarm.get(i));
       }
-    }*/
+    }
     System.out.printf("Primera idea: %s\n",g);
   }
 
