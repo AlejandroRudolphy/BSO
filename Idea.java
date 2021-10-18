@@ -49,7 +49,8 @@ public class Idea {
       return suma >= instance.capacity[id][j];*/
     }
 
-	protected void repare() {
+	protected void repare(Idea g) {
+    
     
 	}
 
