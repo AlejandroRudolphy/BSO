@@ -3,7 +3,7 @@ class Main {
     try{
       for(int i = 0; i < 8; i++){
 			  Problem.getInstance().id = i;
-        System.out.printf("Resolviendo problema %s\n", i);
+        System.out.printf("\nResolviendo problema %s\n", i);
         (new Swarm()).execute();
       }
     }catch(Exception e) {

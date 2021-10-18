@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Idea {
 
     private Problem instance = Problem.getInstance();
@@ -26,11 +28,11 @@ public class Idea {
     }
 
     protected boolean isFeasible() {
-		return type == 0 ? isFeasibleCapability() : isFeasibleMultidimensionalCapability();
+	  	return type == 0 ? isFeasibleCapability() : isFeasibleMultidimensionalCapability();
     }
 
     private boolean isFeasibleCapability() {
-       int suma = 0;
+      int suma = 0;
       for(int i = 0; i < nVariables; i++){
         suma += x[i] * instance.weights[id][0][i];
       }
@@ -49,10 +51,23 @@ public class Idea {
       return suma >= instance.capacity[id][j];*/
     }
 
-	protected void repare(Idea g) {
-    
-    
-	}
+    protected void repare() {
+      double worstValue;
+      int worstValueIndex;
+      int sum;
+      do{
+        worstValueIndex =0;
+        worstValue = 0;
+        sum = 0;  
+        for(int i = 0; i < nVariables; i++){
+          if(x[i] * instance.weights[id][0][i] > worstValue){
+            worstValue = instance.weights[id][0][i];
+            worstValueIndex = i;
+          }
+        }
+        x[worstValueIndex] = 0;
+      } while(!isFeasible());
+    }
 
   /*protected void move(Idea g, float w, float c1, float c2) {
     for (int j = 0; j < nVariables; j++) {

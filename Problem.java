@@ -4,11 +4,14 @@ public class Problem {
 	public int id;
   protected int type = 0;
 
+    // Dim1: Numero de variables
     protected int[] dimension = 
 	{
 		5,6,7,7,8,10,15,24
 	};
     
+  // Dim1: instancia
+  // Dim2: Valor  
 	protected double[][] prices = 
 	{
 		{12,7,11,8,9},
@@ -21,6 +24,9 @@ public class Problem {
 		{825594,1677009,1676628,1523970,943972,97426,69666,1296457,1679693,1902996,1844992,1049289,1252836,1319836,953277,2067538,675367,853655,1826027,65731,901489,577243,466257,369261}
     };
 
+    // Dim1: instancia
+    // Dim2: Posicion
+    // Dim3: Pesos
     protected double[][][] weights = {  
 	{
 		{24,13,23,15,16},
@@ -40,11 +46,14 @@ public class Problem {
 		{382745,799601,909247,729069,467902,44328,34610,698150,823460,903959,853665,551830,610856,670702,488960,951111,323046,446298,931161,31385,496951,264724,224916,169684},
 	}};
 
+  // Dim1: instancia
+  // Dim2: Valor
     protected double[][] capacity = 
 	{
 		{51},{150},{107},{1735},{900},{309},{1747},{6404180} 
 	};
 
+  // Dim1: Valor
 	protected float[] optimal = //solucion final de cada instancia
 	{
 		26f,198f,55f,172f,104f,309f,916f,13549094f
