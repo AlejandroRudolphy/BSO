@@ -104,13 +104,13 @@ public class Idea {
 
     @Override
     public String toString() {
-		return String.format(
-			"optimal value: %.1f, fitness: %.1f, diff: %s, rpd: %.2f%%, x: %s", 
-			optimal(), 
-			fitness(), 
-			diff(),
-			rpd(),
-			java.util.Arrays.toString(x)
-		);
+      return String.format(
+        "optimal value: %.1f, fitness: %.1f, diff: %s, rpd: %.2f%%, x: %s", 
+        optimal(), 
+        fitness(), 
+        diff(),
+        rpd(),
+        java.util.Arrays.toString(x)
+      );
     }
 }
