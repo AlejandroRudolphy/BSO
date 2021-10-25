@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Swarm {
 
-	private int nIdeas = 10;
+	private int nIdeas = 20;
   private final int T = 10; //Cantidad iteraciones
   private final double PReplace = 0.5; /* Probabilidad de cambiar     el centro del cluster por una idea aleatoria */
   private final double PGeneration = 0.5; /* Probabilidad que define   el metodo de generacion ideas entre OneCluster y TwoCluster  */
@@ -30,10 +30,14 @@ public class Swarm {
     swarm = new ArrayList<>();
     g = new Idea();
     Idea p = null;
-    for (int i = 1; i <= nIdeas; i++) {
+    for (int i = 0; i <= nIdeas; i++) {
       p = new Idea();
       if (!p.isFeasible()){ 
+       //System.out.printf("Reparando idea %s: ",i);
        p.repare();
+      }
+      else{
+        //System.out.printf("Idea %s pasa sin problemas\n",i);
       }
       swarm.add(p);
     }

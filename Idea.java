@@ -1,17 +1,18 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Idea {
 
     private Problem instance = Problem.getInstance();
     protected final int type = instance.type; 
     private final int id = instance.id;
-    protected final int nVariables = instance.dimension[id]; 
+    protected final int nVariables = instance.dimension[type][id]; 
 
 	  private int[] x = new int[nVariables];
 
     public Idea() {
-        for (int j = 0; j < nVariables; j++) {
-            x[j] = StdRandom.uniform(2);  
+        for (int i = 0; i < nVariables; i++) {
+            x[i] = StdRandom.uniform(2);  
         }
     }
 
@@ -22,7 +23,7 @@ public class Idea {
     private float fitness() { 
       float beneficio = 0;
       for(int i = 0; i < nVariables; i++){
-        beneficio += x[i] * instance.prices[id][i];
+        beneficio += x[i] * instance.prices[type][id][i];
       }
       return beneficio;
     }
@@ -34,39 +35,60 @@ public class Idea {
     private boolean isFeasibleCapability() {
       int suma = 0;
       for(int i = 0; i < nVariables; i++){
-        suma += x[i] * instance.weights[id][0][i];
+        suma += x[i] * instance.weights[type][id][0][i];
       }
-      return suma <= instance.capacity[id][0];
+      return suma <= instance.capacity[type][id][0];
     }
 
 	  private boolean isFeasibleMultidimensionalCapability() {
-		  return true;
-      /*int suma;
-      for(int j = 0; j < instance.numMochilas; j++){
+      //System.out.println("\n");
+      int j = 0;
+      int suma;
+      boolean F = true;
+      while(j < instance.backpacks[type][id] && F){ 
+        suma = 0; 
         for(int i = 0; i < nVariables; i++){
-          suma = 0;
-          suma += instance.weights[id][j][i];
+          suma += x[i] * instance.weights[type][id][j][i];
         }
+        //System.out.printf("Mochila %s, Suma: %s, capacidad: %s\n", j,suma, instance.capacity[type][id][j]);
+        F = suma <= instance.capacity[type][id][j];
+        j++;
      }
-      return suma >= instance.capacity[id][j];*/
+     return F;
     }
 
     protected void repare() {
-      double worstValue;
-      int worstValueIndex;
+      System.out.println(Arrays.toString(x));
+      int size = 0;
       int sum;
-      do{
-        worstValueIndex =0;
-        worstValue = 0;
-        sum = 0;  
-        for(int i = 0; i < nVariables; i++){
-          if(x[i] * instance.weights[id][0][i] > worstValue){
-            worstValue = instance.weights[id][0][i];
-            worstValueIndex = i;
-          }
+      int k = 0;
+      for(int i = 0; i < nVariables; i++){
+        if (x[i] == 1){
+          size++;
         }
-        x[worstValueIndex] = 0;
+      }
+      int values[] = new int[size];
+       for(int i = 0; i < nVariables; i++){
+        if (x[i] == 1){
+          values[k] = i;
+          k++;
+        }
+      }
+      do{
+        Random generator = new Random();
+        int randomIndex = values[generator.nextInt(values.length)];
+        sum = 0;  
+        for(int j = 0; j < instance.backpacks[type][id]; j++){
+          for(int i = 0; i < nVariables; i++){
+              System.out.printf("Reemplazando el 1 en la posición %s de %s\n",randomIndex,Arrays.toString(values));
+              x[randomIndex] = 0;
+              break;
+            }
+        }
+        //System.out.printf("Nuevo valor: %s\n",Arrays.toString(x));
       } while(!isFeasible());
+        //System.out.println("Idea factible\n");
+        values = null;
     }
 
   /*protected void move(Idea g, float w, float c1, float c2) {
@@ -81,7 +103,7 @@ public class Idea {
     //}
 
 	private float optimal() {
-		return instance.optimal[id];
+		return instance.optimal[type][id];
 	}
 
 	private float diff() {
